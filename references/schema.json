@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "evidence-constrained-kg-builder result.json",
+  "type": "object",
+  "required": ["case_id", "status", "artifact", "self_check"],
+  "properties": {
+    "case_id": {"type": "string"},
+    "status": {"enum": ["success", "partial", "blocked"]},
+    "artifact": {
+      "type": "object",
+      "required": ["entities", "relations"],
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["entity_id", "name", "type", "source_id", "paragraph_id", "quote"],
+            "properties": {
+              "entity_id": {"type": "string"},
+              "name": {"type": "string"},
+              "type": {"enum": ["researcher", "material", "method", "task", "metric", "conclusion"]},
+              "source_id": {"type": "string"},
+              "paragraph_id": {"type": "string"},
+              "quote": {"type": "string"},
+              "mention_type": {"enum": ["self_reported", "paraphrased"]},
+              "evidence_strength": {"enum": ["strong", "weak"]}
+            }
+          }
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["relation_id", "subject", "predicate", "object", "source_id", "paragraph_id", "quote"],
+            "properties": {
+              "relation_id": {"type": "string"},
+              "subject": {"type": "string"},
+              "predicate": {"enum": ["uses", "compares", "outperforms", "supports", "contradicts", "other"]},
+              "object": {"type": "string"},
+              "condition": {"type": "string"},
+              "source_id": {"type": "string"},
+              "paragraph_id": {"type": "string"},
+              "quote": {"type": "string"},
+              "evidence_strength": {"enum": ["strong", "weak"]}
+            }
+          }
+        }
+      }
+    },
+    "evidence_bindings": {"type": "array"},
+    "merge_decisions": {"type": "array"},
+    "conflicts": {"type": "array"},
+    "queries": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["query", "result_subgraph", "supporting_evidence"],
+        "properties": {
+          "query": {"type": "string"},
+          "result_subgraph": {"type": "object"},
+          "supporting_evidence": {"type": "array", "items": {"type": "string"}},
+          "undetermined": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "human_review_items": {"type": "array", "items": {"type": "string"}},
+    "change_log": {"type": "array"},
+    "self_check": {
+      "type": "object",
+      "required": ["entities_grounded", "relations_evidenced", "alignment_justified", "queries_with_evidence"],
+      "properties": {
+        "entities_grounded": {"type": "boolean"},
+        "relations_evidenced": {"type": "boolean"},
+        "alignment_justified": {"type": "boolean"},
+        "queries_with_evidence": {"type": "boolean"}
+      }
+    }
+  }
+}
