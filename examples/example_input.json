@@ -1,0 +1,19 @@
+{
+  "case_id": "DEMO-NOT-A-REAL-CASE",
+  "note": "以下为演示接口的虚构示例，非官方测试案例，不构成正式答案。",
+  "task": "从两篇独立论文构建证据约束图谱，并执行至少3个真实查询",
+  "params": {"language": "zh", "min_queries": 3},
+  "corpus_manifest": [
+    {"source_id": "paper-1", "doi": "10.xxxx/demo-1", "authors": ["A. Author"], "license": "CC-BY"},
+    {"source_id": "paper-2", "doi": "10.xxxx/demo-2", "authors": ["B. Author"], "license": "CC-BY"}
+  ],
+  "materials": {
+    "primary": "（示意）论文1段落索引，paragraph_id=p-12 …",
+    "secondary": "（示意）论文2段落索引，paragraph_id=p-5 …"
+  },
+  "queries": [
+    "（示意）方法X使用了哪些材料？",
+    "（示意）指标Z在两篇论文中如何被报告？",
+    "（示意）有哪些结论与Y矛盾？"
+  ]
+}
