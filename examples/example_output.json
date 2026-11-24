@@ -1,0 +1,37 @@
+{
+  "case_id": "DEMO-NOT-A-REAL-CASE",
+  "status": "success",
+  "note": "示意输出，非真实案例结果。示例中的论文、作者、数值、DOI 均为虚构，不代表任何真实论文结论或 benchmark 分数。",
+  "artifact": {
+    "entities": [
+      {"entity_id": "E1", "name": "（示意）方法X", "type": "method", "source_id": "paper-1", "paragraph_id": "p-12", "quote": "（示意短引）方法X被用于……", "mention_type": "self_reported", "evidence_strength": "strong"},
+      {"entity_id": "E2", "name": "（示意）数据集D", "type": "material", "source_id": "paper-1", "paragraph_id": "p-12", "quote": "（示意短引）在数据集D上", "mention_type": "self_reported", "evidence_strength": "strong"},
+      {"entity_id": "E3", "name": "（示意）方法X'", "type": "method", "source_id": "paper-2", "paragraph_id": "p-5", "quote": "（示意短引）方法X'……", "mention_type": "self_reported", "evidence_strength": "weak"}
+    ],
+    "relations": [
+      {"relation_id": "R1", "subject": "E1", "predicate": "uses", "object": "E2", "condition": "（示意）论文1实验设定", "source_id": "paper-1", "paragraph_id": "p-12", "quote": "（示意短引）方法X在数据集D上", "evidence_strength": "strong"}
+    ]
+  },
+  "evidence_bindings": [
+    {"node_or_edge_id": "E1", "source_id": "paper-1", "paragraph_id": "p-12", "quote": "（示意短引）", "evidence_strength": "strong"},
+    {"node_or_edge_id": "R1", "source_id": "paper-1", "paragraph_id": "p-12", "quote": "（示意短引）", "evidence_strength": "strong"}
+  ],
+  "merge_decisions": [
+    {"candidates": ["E1", "E3"], "decision": "keep_separate", "basis": "（示意）两篇论文的不同方法实例与实验条件，不能因名称相近合并"}
+  ],
+  "conflicts": [],
+  "queries": [
+    {"query": "（示意）方法X使用了哪些材料？", "result_subgraph": {"nodes": ["E1", "E2"], "edges": ["R1"]}, "supporting_evidence": ["（示意）paper-1 p-12 短引"], "undetermined": []},
+    {"query": "（示意）指标Z在两篇论文中如何被报告？", "result_subgraph": {"nodes": [], "edges": []}, "supporting_evidence": [], "undetermined": ["（示意）论文2未报告指标Z，如实返回空子图"]},
+    {"query": "（示意）有哪些结论与Y矛盾？", "result_subgraph": {"nodes": [], "edges": []}, "supporting_evidence": [], "undetermined": ["（示意）无明确矛盾证据，不编造关系"]}
+  ],
+  "uncertainties": ["（示意）论文2方法X'的证据强度为 weak，需人工核对原文"],
+  "human_review_items": ["（示意）E1 与 E3 名称相近但按条件判定不合并，建议人工确认"],
+  "change_log": [],
+  "self_check": {
+    "entities_grounded": true,
+    "relations_evidenced": true,
+    "alignment_justified": true,
+    "queries_with_evidence": true
+  }
+}
